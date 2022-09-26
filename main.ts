@@ -1,5 +1,12 @@
 radio.setGroup(0);
+let active = false
 
-snore.initialise();
+input.onButtonPressed(Button.A, function () {
+    active = !active;
+    if (active) {
+        snore.initialise();
+    }
+})
+
 radio.onReceivedValue(snore.receiveData);
-loops.everyInterval(200, snore.storeData);
+loops.everyInterval(200, () => {if (active){snore.storeData}});
