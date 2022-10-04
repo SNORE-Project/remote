@@ -1,6 +1,7 @@
 radio.setGroup(0);
 let active = false;
 let statusLed = true;
+let debug = false;
 
 const setLed = () => {
     if (active && statusLed) {
@@ -28,5 +29,14 @@ input.onButtonPressed(Button.B, () => {
     setLed();
 });
 
-radio.onReceivedValue(snore.receiveData);
+input.onButtonPressed(Button.AB, () => {
+    debug = !debug;
+})
+
+radio.onReceivedValue((name, value) => {
+    if (debug) {
+        basic.showString(`recieved ${name}:${value}`);
+    }
+    snore.receiveData(name, value);
+});
 loops.everyInterval(snore.intervalSize, () => {if (active){snore.storeData}});
