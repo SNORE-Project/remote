@@ -14,8 +14,8 @@ const setLed = () => {
 input.onButtonPressed(Button.A, () => {
     active = !active;
     if (active) {
-        snore.initialise();
         basic.showString("On");
+        snore.initialise();
     } else {
         basic.showString("Off");
     }
@@ -34,9 +34,11 @@ input.onButtonPressed(Button.AB, () => {
 })
 
 radio.onReceivedValue((name, value) => {
+    /*
     if (debug) {
         basic.showString(`recieved ${name}:${value}`);
     }
+    */
     snore.receiveData(name, value);
 });
-loops.everyInterval(snore.intervalSize, () => {if (active){snore.storeData()}});
+loops.everyInterval(snore.intervalSize, () => {if(active){snore.storeData()}});
