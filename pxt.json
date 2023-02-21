@@ -4,7 +4,7 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "snore library": "github:SNORE-Project/pxt-snore#v1.3.0"
+        "IM01": "github:xinabox/pxt-IM01#v0.1.8"
     },
     "files": [
         "main.ts",
