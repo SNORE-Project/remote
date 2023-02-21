@@ -1,9 +1,13 @@
 radio.setGroup(0);
-snore.initialise();
 
 let pulse: number = null;
 let time: number = null;
 let movement: number = null;
+
+IM01.overwriteFile("info.txt", `${control.deviceSerialNumber().toString()}\n${control.deviceName()}\n`);
+IM01.appendFile("data.csv", "time,pulse,movement\n");
+
+IM01.turn_off_leds();
 
 radio.onReceivedValue((name, value) => {
     if (name == "pulse") {
@@ -12,7 +16,6 @@ radio.onReceivedValue((name, value) => {
         time = value;
     } else if (name == "movement") {
         movement = value;
+        IM01.appendFileLine("data.csv", `${time},${pulse},${movement}`);
     }
 });
-
-//loops.everyInterval(snore.intervalSize, snore.storeData);
