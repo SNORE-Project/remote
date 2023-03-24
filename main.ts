@@ -1,8 +1,8 @@
 radio.setGroup(0);
 
-let pulse: number = null;
-let time: number = null;
-let movement: number = null;
+let pulse = -1;
+let time = -1;
+let movement = -1;
 
 IM01.overwriteFile("info.txt", `${control.deviceSerialNumber().toString()}\n${control.deviceName()}\n`);
 IM01.appendFile("data.csv", "time,pulse,movement\n");
@@ -17,5 +17,8 @@ radio.onReceivedValue((name, value) => {
     } else if (name == "movement") {
         movement = value;
         IM01.appendFileLine("data.csv", `${time},${pulse},${movement}`);
+        pulse = -1;
+        time = -1;
+        movement = -1;
     }
 });
