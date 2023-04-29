@@ -17,8 +17,5 @@ radio.onReceivedValue((name, value) => {
     } else if (name == "movement") {
         movement = value;
         IM01.appendFileLine("data.csv", `${time},${pulse},${movement}`);
-        pulse = -1;
-        time = -1;
-        movement = -1;
     }
 });
